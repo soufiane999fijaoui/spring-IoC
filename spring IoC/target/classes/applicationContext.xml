@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Configuration Spring en XML (alternative aux annotations @Component/@Autowired).
+    Chaque <bean> décrit un objet géré par le conteneur IoC.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Bean "dao" : première implémentation de IDao (100.0). -->
+    <bean id="dao" class="dao.DaoImpl"></bean>
+
+    <!-- Bean "dao2" : seconde implémentation de IDao (150.0). -->
+    <bean id="dao2" class="dao.DaoImpl2"></bean>
+
+    <!--
+        Bean "metier" : on injecte l'implémentation "dao2" par setter
+        (<property name="dao" ...> appelle setDao(...)).
+    -->
+    <bean id="metier" class="metier.MetierImpl">
+        <property name="dao" ref="dao2"></property>
+    </bean>
+
+</beans>
